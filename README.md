@@ -40,7 +40,7 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 
 <a name="relative-resource"></a>
 ## 相关资源
-* [颠覆式前端UI开发框架](React http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react)
+* [颠覆式前端UI开发框架——React](http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react)
 * [React 入门教程](https://hulufei.gitbooks.io/react-tutorial/content/)
 * [React Router 使用教程](http://www.ruanyifeng.com/blog/2016/05/react_router.* html)
 * [React 测试入门教程](http://www.ruanyifeng.com/blog/2016/02/react-testing-* tutorial.html)
