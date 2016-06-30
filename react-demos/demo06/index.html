@@ -19,13 +19,13 @@
      * input标签需要闭合
      */
     var Form = React.createClass({
-        handleclick: function() {
+        handleClick: function() {
             var username = this.refs.username;
             username.placeholder= "请输入用户名称";
             username.focus();
         },
         render: function() {
-            return <form><input type="text" ref="username"/><input type="button" value="Click Me" onClick={this.handleclick}/></form>
+            return <form><input type="text" ref="username"/><input type="button" value="Click Me" onClick={this.handleClick}/></form>
         }
     });
 

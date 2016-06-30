@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo11-mixin</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../build/react.js"></script>
+<script src="../build/react-dom.js"></script>
+<script src="../build/browser.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+</head>
+<body>
+<div id="countdown-01"></div>
+<div id="countdown-02"></div>
+<script type="text/babel">
+    /**
+     * 实现简单倒计时
+     */
+    var Countdown = React.createClass({
+        getInitialState: function() {
+            return {
+                leftTime: 10
+            }
+        },
+        reflow: function() {
+            if(this.state.leftTime > 0) {
+                this.setState({
+                    leftTime: this.state.leftTime - 1
+                });
+            }else {
+                clearInterval(this._interval);
+            }
+        },
+        componentDidMount: function() {
+            this._interval = setInterval(this.reflow, 1000);
+        },
+        render: function() {
+            return (
+                <p>{this.state.leftTime}秒</p>
+            );
+        }
+    });
+
+    ReactDOM.render(<Countdown/>, document.getElementById('countdown-01'));
+
+    /**
+     * 使用mixin优化，提取公共部分，多个组件共用
+     */
+    
+    var IntervalMixin = function() {
+        return {
+            componentDidMount: function() {
+                this._interval = setInterval(this.onReflow, 1000);
+            },
+            componentWillUnmount: function() {
+                clearInterval(this._interval);
+            }
+        }
+    };
+    
+    var CountdownTwo = React.createClass({
+        mixins: [IntervalMixin()],
+        getInitialState: function() {
+            return {
+                leftTime: 10
+            }
+        },
+        onReflow: function() {
+            if(this.state.leftTime > 0) {
+                this.setState({
+                    leftTime: this.state.leftTime - 1
+                });
+            }else {
+                clearInterval(this._interval);
+            }
+        },
+        render: function() {
+            return (
+                <p>{this.state.leftTime}秒</p>
+            );
+        }
+    });
+
+    ReactDOM.render(<CountdownTwo/>, document.getElementById('countdown-02'));
+</script> 
+</body>
+</html>

@@ -10,83 +10,86 @@
 <script src="../build/react-dom.js"></script>
 <script src="../build/browser.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+<style type="text/css">
 
+    .reposList {
+        width: 960px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0 10px;
+    }
+
+    .tc {
+        text-align: center;
+    }
+</style>
 </head>
 <body>
-<div id="form-outer"></div>
+<div id="reposList" class="reposList"></div>
+<script type="text/javascript" src="../build/jquery-1.8.3.js"></script>
 <script type="text/babel">
-    /**
-     * console.log查看组件的生命周期!!!
-     */
-    var Form = React.createClass({
-        // ==========实例化===========
-        getDefaultProps: function() {
-            console.log('getDefaultProps');
-        },
+/**
+ * 本示例请求github repositrories stars
+ */
 
-        getInitialState: function() {
-            console.log('getInitialState');
-            return {
-                username: 'Benjamin-zuo'
-            };
-        },
-
-        componentWillMount: function() {
-            console.log('componentWillMount');
-        },
-
-        render: function() {
-            console.log('render');
-            return (
-                <div class="input-outer">
-                    <input type="text" value={this.state.username} onChange={this.handleChange} />
-                    <input type="button" value="remove" onClick={this.handleClick}/>
-                </div>
-                );
-        },
-
-        componentDidMount: function() {
-            console.log('componentDidMount');
-        },
-
-        // =========存在期===========
-        // 已加载组件收到新的参数时调用，比如：组件的props通过父组件来更改时
-        componentWillReceiveProps: function() {
-            console.log('componentWillReceiveProps');
-        },
-
-        // 组件判断是否重新渲染时调用
-        shouldComponentUpdate: function() {
-            console.log('shouldComponentUpdate');
-            return true;
-        },
-
-        // 组件更新前调用
-        componentWillUpdate: function() {
-            console.log('componentWillUpdate');
-        },
-        
-        // 组件更新完调用
-        componentDidUpdate: function() {
-            console.log('componentDidUpdate');
-        },
-
-        // ===========销毁& 清理期==========
-        componentWillUnmount: function() {
-            console.log('componentWillUnmount');
-        },
-
-        handleClick: function() {
-            document.getElementById('form-outer').innerHTML = '';
-        },
-
-        handleChange: function(ev) {
-            this.setState({
-                username: ev.target.value
-            })
+var RepositoryList = React.createClass({
+    getInitialState: function() {
+        return  {
+            loading: true,
+            error: null,
+            data: null
         }
-    });
-    ReactDOM.render(<Form/>, document.getElementById('form-outer'));
+    },
+    componentDidMount: function() {
+        $.getJSON(this.props.source)
+        .done(function(data) {
+            this.setState({
+                loading: false,
+                data: data
+            })
+        }.bind(this))
+        .fail(function(error) {
+            this.setState({
+                loading: false,
+                error: error
+            });
+        }.bind(this));
+    },
+    render: function() {
+        if(this.state.loading) {
+            return <p className="tc">loading...</p>;
+        }
+
+        if(this.state.error !== null){
+            return <p className="tc">Error: {this.state.error.message}</p>
+        }
+
+        var data = this.state.data || {},
+            items = data.items,
+            total = data.total_count,
+            reposList = items.map(function(item, index, arr) {
+                return (
+                    <li key={index}>
+                        <h3 className="title"><a href={item.html_url}>{item.name}</a></h3>
+                        <p className="num">Stars：{item.stargazers_count}，Watchers：{item.watchers_count}，Forks：{item.forks_count}</p>
+                        <p className="desc">{item.description}</p>
+                    </li>
+                )
+            });
+
+        return (
+            <div className="repos-list">
+                <h1 className="tc">Most Popular JavaScript Projects in Github</h1>
+                <h2 className="tc">Total: {total}</h2>
+                <ol>{reposList}</ol>
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(<RepositoryList source="https://api.github.com/search/repositories?q=javascript&sort=stars"/>, document.getElementById('reposList'));
+
 </script> 
 </body>
 </html>
