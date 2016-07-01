@@ -1,0 +1,14 @@
+name: React-Tutorial
+url: https://zuojj.github.io/react-tutorial/
+source:      .
+destination: ./_site
+lsi:      false
+safe:     false
+markdown: kramdown
+permalink: /tutorial/:year/:month/:title/
+paginate: 12
+paginate_path: "articles/page:num"
+encoding: utf-8
+gems: [jekyll-paginate] 
+post_defaults:
+  layout: post

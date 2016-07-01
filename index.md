@@ -1,4 +1,11 @@
+---
+layout: index
+title: 首页
+permalink: /
+---
+
 # React 学习指南
+
 ## 目录
 * [官方网站](#site)
 * [技术栈](#tech-stack)
@@ -7,16 +14,19 @@
 * [辅助工具](#tools)
 
 <a name="tech-stack"></a>
+
 ## 技术栈
 React + React-Router + Redux + Webpack + ES6 + Mocha
 
 <a name="site"></a>
+
 ## 官网
 * [React](https://facebook.github.io/react/index.html)
 * [Redux](https://github.com/reactjs/redux)
 * [Flux](https://facebook.github.io/flux/)
 
 <a name="demos"></a>
+
 ## Demos (react-v15.1.0)
 * [Demo01 - Hello World](https://zuojj.github.io/react-tutorial/react-demos/demo01/index.html)
 * [Demo02 - JSX 语法](https://zuojj.github.io/react-tutorial/react-demos/demo02/index.html)
@@ -39,6 +49,7 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 * [Demo19 - 完整项目]()
 
 <a name="relative-resource"></a>
+
 ## 相关资源
 * [颠覆式前端UI开发框架——React](http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react)
 * [React 入门教程](https://hulufei.gitbooks.io/react-tutorial/content/)
@@ -57,6 +68,7 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 * [React-Native学习指南](https://github.com/reactnativecn/react-native-guide)
 
 <a name="tools"></a>
+
 ## 辅助工具
 * [New React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 * [React-webpack-cookbook中文版](http://fakefish.github.io/react-webpack-cookbook/)
