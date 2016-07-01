@@ -28,25 +28,12 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 <a name="demos"></a>
 
 ## Demos (react-v15.1.0)
-* [Demo01 - Hello World](https://zuojj.github.io/react-tutorial/react-demos/demo01/index.html)
-* [Demo02 - JSX 语法](https://zuojj.github.io/react-tutorial/react-demos/demo02/index.html)
-* [Demo03 - 简单组件封装](https://zuojj.github.io/react-tutorial/react-demos/demo03/index.html)
-* [Demo04 - Chidren属性](https://zuojj.github.io/react-tutorial/react-demos/demo04/index.html)
-* [Demo05 - PropTypes](https://zuojj.github.io/react-tutorial/react-demos/demo05/index.html)
-* [Demo06 - 获取真实的DOM节点](https://zuojj.github.io/react-tutorial/react-demos/demo06/index.html)
-* [Demo07 - 状态机state](https://zuojj.github.io/react-tutorial/react-demos/demo07/index.html)
-* [Demo08 - Form表单](https://zuojj.github.io/react-tutorial/react-demos/demo08/index.html)
-* [Demo09 - 组件的生命周期](https://zuojj.github.io/react-tutorial/react-demos/demo09/index.html)
-* [Demo10 - Ajax请求](https://zuojj.github.io/react-tutorial/react-demos/demo10/index.html)
-* [Demo11 - mixin](https://zuojj.github.io/react-tutorial/react-demos/demo11/index.html)
-* [Demo12 - 动画](https://zuojj.github.io/react-tutorial/react-demos/demo12/index.html)
-* [Demo13 - 组件的复合]()
-* [Demo14 - Toast组件开发]()
-* [Demo15 - 开发工具]()
-* [Demo16 - 第三方类库]()
-* [Demo17 - 测试]()
-* [Demo18 - 项目基础架构]()
-* [Demo19 - 完整项目]()
+
+<ol class="index-olist">
+{% for post in site.posts %}
+    <li><a href="{{ post.url }}" title="{{ post.title | strip_html }}">{{ post.title | strip_html }}</a> <span class="date">[{{ post.author }} 发布于 {{ post.date | date_to_string}}]</span></li>
+{% endfor %}
+</ol>
 
 <a name="relative-resource"></a>
 
