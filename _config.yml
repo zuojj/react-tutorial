@@ -2,6 +2,7 @@ name: React-Tutorial
 url: https://zuojj.github.io/react-tutorial/
 source:      .
 destination: ./_site
+baseurl: /react-tutorial
 lsi:      false
 safe:     false
 markdown: kramdown
