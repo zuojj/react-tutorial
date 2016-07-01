@@ -31,7 +31,7 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 
 <ol class="index-olist">
 {% for post in site.posts %}
-    <li><a href="{{ post.url }}" title="{{ post.title | strip_html }}">{{ post.title | strip_html }}</a> <span class="date">[{{ post.author }} 发布于 {{ post.date | date_to_string}}]</span></li>
+    <li><a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title | strip_html }}">{{ post.title | strip_html }}</a> <span class="date">[{{ post.author }} 发布于 {{ post.date | date_to_string}}]</span></li>
 {% endfor %}
 </ol>
 
