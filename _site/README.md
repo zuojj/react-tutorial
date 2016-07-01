@@ -63,3 +63,6 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 * [开源项目持续集成构建工具Travis CI](https://travis-ci.org/)
 * [测试代码的覆盖率coveralls.io](coveralls.io)
 
+## Jekyll
+* [http://blog.csdn.net/leorowe/article/details/41968349](http://blog.csdn.net/leorowe/article/details/41968349)
+* [gem install SSL 错误](https://ruby-china.org/topics/29323)

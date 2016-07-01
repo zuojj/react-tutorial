@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo10-Ajax请求</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../build/react.js"></script>
+<script src="../build/react-dom.js"></script>
+<script src="../build/browser.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+<style type="text/css">
+
+    .reposList {
+        width: 960px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0 10px;
+    }
+
+    .tc {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div id="reposList" class="reposList"></div>
+<script type="text/javascript" src="../build/jquery-1.8.3.js"></script>
+<script type="text/babel">
+/**
+ * 本示例请求github repositrories stars
+ */
+
+var RepositoryList = React.createClass({
+    getInitialState: function() {
+        return  {
+            loading: true,
+            error: null,
+            data: null
+        }
+    },
+    componentDidMount: function() {
+        $.getJSON(this.props.source)
+        .done(function(data) {
+            this.setState({
+                loading: false,
+                data: data
+            })
+        }.bind(this))
+        .fail(function(error) {
+            this.setState({
+                loading: false,
+                error: error
+            });
+        }.bind(this));
+    },
+    render: function() {
+        if(this.state.loading) {
+            return <p className="tc">loading...</p>;
+        }
+
+        if(this.state.error !== null){
+            return <p className="tc">Error: {this.state.error.message}</p>
+        }
+
+        var data = this.state.data || {},
+            items = data.items,
+            total = data.total_count,
+            reposList = items.map(function(item, index, arr) {
+                return (
+                    <li key={index}>
+                        <h3 className="title"><a href={item.html_url}>{item.name}</a></h3>
+                        <p className="num">Stars：{item.stargazers_count}，Watchers：{item.watchers_count}，Forks：{item.forks_count}</p>
+                        <p className="desc">{item.description}</p>
+                    </li>
+                )
+            });
+
+        return (
+            <div className="repos-list">
+                <h1 className="tc">Most Popular JavaScript Projects in Github</h1>
+                <h2 className="tc">Total: {total}</h2>
+                <ol>{reposList}</ol>
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(<RepositoryList source="https://api.github.com/search/repositories?q=javascript&sort=stars"/>, document.getElementById('reposList'));
+
+</script> 
+</body>
+</html>
