@@ -624,6 +624,10 @@ a:hover {
   border: 1px solid #ccc;
   border-radius: 5px; }
 
+.browsehappy {
+  background-color: orange;
+  line-height: 24px; }
+
 /*
 The MIT License (MIT)
 

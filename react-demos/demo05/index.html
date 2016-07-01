@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo05-PropTypes</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../build/react.js"></script>
+<script src="../build/react-dom.js"></script>
+<script src="../build/browser.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+</head>
+<body>
+<div id="header"></div>
+<script type="text/babel">
+    /**
+     * 如果给_title not String type
+     * Warning: Failed propType: Required prop `title` was not specified in `Title`.
+     */
+    var _title = '我是标题';
+    var Title = React.createClass({
+        propTypes: {
+            title: React.PropTypes.string.isRequired
+        },
+        render: function() {
+            return <h1>{this.props.title}</h1>
+        }
+    });
+
+    ReactDOM.render(<Title title={_title}/>, document.getElementById('header'));
+</script> 
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo06-获取真实的DOM节点</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../build/react.js"></script>
+<script src="../build/react-dom.js"></script>
+<script src="../build/browser.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+</head>
+<body>
+<div id="form"></div>
+<script type="text/babel">
+    /**
+     * Uncaught SyntaxError: embedded: Expected corresponding JSX closing tag for <input> (7:122)
+     * input标签需要闭合
+     */
+    var Form = React.createClass({
+        handleClick: function() {
+            var username = this.refs.username;
+            username.placeholder= "请输入用户名称";
+            username.focus();
+        },
+        render: function() {
+            return <form><input type="text" ref="username"/><input type="button" value="Click Me" onClick={this.handleClick}/></form>
+        }
+    });
+
+    ReactDOM.render(<Form/>, document.getElementById('form'));
+</script> 
+</body>
+</html>

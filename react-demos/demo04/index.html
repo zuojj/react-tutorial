@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo04-Chidren属性</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../build/react.js"></script>
+<script src="../build/react-dom.js"></script>
+<script src="../build/browser.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+</head>
+<body>
+
+<div id="olist"></div>
+
+<script type="text/babel">
+    var ListItem = React.createClass({
+        render: function() {
+            return <li>{this.props.data}</li>
+        }
+    });
+
+    var OrderList = React.createClass({
+        // item: {"type":"span","key":null,"ref":null,"props":{"children":"Monday"},"_owner":null,"_store":{}}
+        // 用 React.Children.map 来遍历子节点，而不用担心 this.props.children 的数据类型是 undefined 还是 object
+        render: function() {
+            return <ol>{React.Children.map(this.props.children, function(item) {
+                return <ListItem data={item.props.children}/>
+            })}</ol>
+        }
+    });
+
+    ReactDOM.render(
+        <OrderList>
+            <span>Monday</span>
+            <span>Tuesday</span>
+            <span>Wednesday</span>
+            <span>Thursday</span>
+            <span>Friday</span>
+            <span>Saturday</span>
+            <span>Sunday</span>
+        </OrderList>, 
+        document.getElementById('olist')
+    );
+</script> 
+</body>
+</html>
