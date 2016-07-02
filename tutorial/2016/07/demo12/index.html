@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Demo12 - 动画_zuojj" />
+    <meta name="keywords" content="Demo12 - 动画,zuojj,benjamin,benjamin-zuo" />
+    <link rel="alternate" type="application/rss+xml" title="" href="https://zuojj.github.io/react-tutorial//feed.xml">
+    <title>Demo12 - 动画 - zuojj</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">您使用的浏览器版本<strong>过老</strong>，请<a href="http://browsehappy.com/">使用最新的浏览器</a>来提升浏览体验。</p>
+<![endif]-->
+<section class="page-header">
+    <h1 class="project-name">React-tutorial</h1>
+    <h2 class="project-tagline">React 学习指南及实例教程</h2>
+    <a href="https://github.com/zuojj/react-tutorial" class="btn">View on GitHub</a>
+    <a href="https://github.com/zuojj/react-tutorial/zipball/master" class="btn">Download .zip</a>
+    <a href="https://github.com/zuojj/react-tutorial/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+<section class="main-content">
+    <div class="main-content-crumb"><a href="/">首页</a><span style="margin: 0 10px">&gt;</span><span>demo12</span></div>
+    <h3 title="Demo12 - 动画">Demo12 - 动画 by zuojj at 02 Jul 2016</h3>
+    <iframe frameborder="0" width="100%" height="300" border="0" src="/react-demos/demo12/index.html" class="post-iframe"></iframe>
+    <p>本例中实现动画时需注意，需要使用react-with-addons.js替换前面实例中引入的react.js，并初始化<code class="highlighter-rouge">var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;</code>，同时需要设置<code class="highlighter-rouge">transitionName</code>来对应CSS中的动画类，<code class="highlighter-rouge">transitionEnterTimeout</code>、<code class="highlighter-rouge">transitionLeaveTimeout</code>来指定动画timeout</p>
+
+<p><strong>HTML</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div id="animation" class="animation"&gt;&lt;/div&gt;
+</code></pre>
+</div>
+
+<p><strong>CSS</strong></p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.animation</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.filter</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.filter-text</span> <span class="p">{</span>
+    <span class="nl">line-height</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+
+    <span class="nl">height</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+
+    <span class="nl">flex</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.filter-btn</span> <span class="p">{</span>
+    <span class="nl">line-height</span><span class="p">:</span> <span class="m">32px</span><span class="p">;</span>
+
+    <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">32px</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+
+    <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.olist</span> <span class="p">{</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">padding-left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="nl">list-style</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">dotted</span> <span class="m">#ccc</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.olist</span> <span class="nt">li</span> <span class="p">{</span>
+    <span class="nl">line-height</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span> <span class="m">5px</span><span class="p">;</span>
+
+    <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">dotted</span> <span class="m">#ccc</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#efefef</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.olist</span> <span class="nt">li</span><span class="nd">:last-child</span> <span class="p">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.olist</span> <span class="nt">li</span> <span class="nc">.content</span> <span class="p">{</span>
+    <span class="nl">flex</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.btn-remove</span> <span class="p">{</span>
+    <span class="nl">line-height</span><span class="p">:</span> <span class="m">24px</span><span class="p">;</span>
+
+    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+
+    <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">24px</span><span class="p">;</span>
+    <span class="nl">margin-top</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+
+    <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#ccc</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.fade-enter</span> <span class="p">{</span>
+    <span class="nl">-webkit-animation-duration</span><span class="p">:</span> <span class="m">.5s</span><span class="p">;</span>
+            <span class="nl">animation-duration</span><span class="p">:</span> <span class="m">.5s</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-play-state</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+            <span class="nl">animation-play-state</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-timing-function</span><span class="p">:</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">.55</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.55</span><span class="p">,</span> <span class="m">.2</span><span class="p">);</span>
+            <span class="nl">animation-timing-function</span><span class="p">:</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">.55</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.55</span><span class="p">,</span> <span class="m">.2</span><span class="p">);</span>
+
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="nl">-webkit-animation-fill-mode</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+            <span class="nl">animation-fill-mode</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.fade-appear</span> <span class="p">{</span>
+    <span class="nl">-webkit-animation-duration</span><span class="p">:</span> <span class="m">.5s</span><span class="p">;</span>
+            <span class="nl">animation-duration</span><span class="p">:</span> <span class="m">.5s</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-play-state</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+            <span class="nl">animation-play-state</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-timing-function</span><span class="p">:</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">.55</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.55</span><span class="p">,</span> <span class="m">.2</span><span class="p">);</span>
+            <span class="nl">animation-timing-function</span><span class="p">:</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">.55</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.55</span><span class="p">,</span> <span class="m">.2</span><span class="p">);</span>
+
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="nl">-webkit-animation-fill-mode</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+            <span class="nl">animation-fill-mode</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.fade-leave</span> <span class="p">{</span>
+    <span class="nl">-webkit-animation-duration</span><span class="p">:</span> <span class="m">.5s</span><span class="p">;</span>
+            <span class="nl">animation-duration</span><span class="p">:</span> <span class="m">.5s</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-play-state</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+            <span class="nl">animation-play-state</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-timing-function</span><span class="p">:</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">.55</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.55</span><span class="p">,</span> <span class="m">.2</span><span class="p">);</span>
+            <span class="nl">animation-timing-function</span><span class="p">:</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">.55</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.55</span><span class="p">,</span> <span class="m">.2</span><span class="p">);</span>
+
+    <span class="nl">-webkit-animation-fill-mode</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+            <span class="nl">animation-fill-mode</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.fade-enter.fade-enter-active</span> <span class="p">{</span>
+    <span class="nl">-webkit-animation-name</span><span class="p">:</span> <span class="n">fadeIn</span><span class="p">;</span>
+            <span class="nl">animation-name</span><span class="p">:</span> <span class="n">fadeIn</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-play-state</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span>
+            <span class="nl">animation-play-state</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.fade-appear.fade-appear-active</span> <span class="p">{</span>
+    <span class="nl">-webkit-animation-name</span><span class="p">:</span> <span class="n">fadeIn</span><span class="p">;</span>
+            <span class="nl">animation-name</span><span class="p">:</span> <span class="n">fadeIn</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-play-state</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span>
+            <span class="nl">animation-play-state</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.fade-leave.fade-leave-active</span> <span class="p">{</span>
+    <span class="nl">-webkit-animation-name</span><span class="p">:</span> <span class="n">fadeOut</span><span class="p">;</span>
+            <span class="nl">animation-name</span><span class="p">:</span> <span class="n">fadeOut</span><span class="p">;</span>
+    <span class="nl">-webkit-animation-play-state</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span>
+            <span class="nl">animation-play-state</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@-webkit-keyframes</span> <span class="n">fadeIn</span> <span class="p">{</span>
+    <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="n">fadeIn</span> <span class="p">{</span>
+    <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">@-webkit-keyframes</span> <span class="n">fadeOut</span> <span class="p">{</span>
+    <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="n">fadeOut</span> <span class="p">{</span>
+    <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p><strong>JAVASCRIPT</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ReactCSSTransitionGroup</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">CSSTransitionGroup</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">TodoList</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">items</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Benjamin'</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">handleAdd</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+            <span class="nx">_items</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">'请填写用户名称'</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">_items</span><span class="p">.</span><span class="nx">includes</span> <span class="o">&amp;&amp;</span> <span class="nx">_items</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">'已存在该项！'</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+            <span class="na">items</span><span class="p">:</span> <span class="nx">_items</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">},</span>
+    <span class="na">handleRemove</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_items</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span>
+
+        <span class="nx">_items</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+            <span class="na">items</span><span class="p">:</span> <span class="nx">_items</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_items</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>                    <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"btn-remove"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleRemove</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">index</span><span class="p">)}</span><span class="o">&gt;</span><span class="k">delete</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>            <span class="p">);</span>
+        <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"filter"</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"filter-text"</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">"请输入用户名"</span> <span class="nx">ref</span><span class="o">=</span><span class="s2">"username"</span> <span class="o">/&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"filter-btn"</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"Add"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleAdd</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">ol</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"olist"</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">ReactCSSTransitionGroup</span>  <span class="nx">transitionEnterTimeout</span><span class="o">=</span><span class="p">{</span><span class="mi">500</span><span class="p">}</span> <span class="nx">transitionLeaveTimeout</span><span class="o">=</span><span class="p">{</span><span class="mi">500</span><span class="p">}</span> <span class="nx">transitionName</span><span class="o">=</span><span class="s2">"fade"</span><span class="o">&gt;</span>
+                        <span class="p">{</span><span class="nx">_items</span><span class="p">}</span>
+                    <span class="o">&lt;</span><span class="sr">/ReactCSSTransitionGroup</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/ol</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">TodoList</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'animation'</span><span class="p">));</span>
+</code></pre>
+</div>
+
+</section>
+<footer class="page-footer">
+    <span class="page-footer-owner">
+        <a href="https://github.com/zuojj/react-tutorial">React-tutorial</a>
+        is maintained by
+        <a href="https://github.com/zuojj">zuojj</a>
+    </span>
+</footer>
+</body>
+</html>

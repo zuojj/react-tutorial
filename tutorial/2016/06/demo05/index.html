@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Demo05 - PropTypes_zuojj" />
+    <meta name="keywords" content="Demo05 - PropTypes,zuojj,benjamin,benjamin-zuo" />
+    <link rel="alternate" type="application/rss+xml" title="" href="https://zuojj.github.io/react-tutorial//feed.xml">
+    <title>Demo05 - PropTypes - zuojj</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">您使用的浏览器版本<strong>过老</strong>，请<a href="http://browsehappy.com/">使用最新的浏览器</a>来提升浏览体验。</p>
+<![endif]-->
+<section class="page-header">
+    <h1 class="project-name">React-tutorial</h1>
+    <h2 class="project-tagline">React 学习指南及实例教程</h2>
+    <a href="https://github.com/zuojj/react-tutorial" class="btn">View on GitHub</a>
+    <a href="https://github.com/zuojj/react-tutorial/zipball/master" class="btn">Download .zip</a>
+    <a href="https://github.com/zuojj/react-tutorial/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+<section class="main-content">
+    <div class="main-content-crumb"><a href="/">首页</a><span style="margin: 0 10px">&gt;</span><span>demo05</span></div>
+    <h3 title="Demo05 - PropTypes">Demo05 - PropTypes by zuojj at 30 Jun 2016</h3>
+    <iframe frameborder="0" width="100%" height="300" border="0" src="/react-demos/demo05/index.html" class="post-iframe"></iframe>
+    <p><strong>HTML</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div id="title"&gt;&lt;/div&gt;
+</code></pre>
+</div>
+
+<p><strong>JAVASCRIPT</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ + 如果给_title not String type
+ + Warning: Failed propType: Required prop `title` was not specified in `Title`
+ */</span>
+
+<span class="kd">var</span> <span class="nx">_title</span> <span class="o">=</span> <span class="s1">'我是标题'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">Title</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">propTypes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">title</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Title</span> <span class="nx">title</span><span class="o">=</span><span class="p">{</span><span class="nx">_title</span><span class="p">}</span><span class="sr">/&gt;, document.getElementById</span><span class="se">(</span><span class="sr">'title'</span><span class="se">))</span><span class="err">;
+</span></code></pre>
+</div>
+
+</section>
+<footer class="page-footer">
+    <span class="page-footer-owner">
+        <a href="https://github.com/zuojj/react-tutorial">React-tutorial</a>
+        is maintained by
+        <a href="https://github.com/zuojj">zuojj</a>
+    </span>
+</footer>
+</body>
+</html>

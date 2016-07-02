@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Demo09 - 组件的生命周期_zuojj" />
+    <meta name="keywords" content="Demo09 - 组件的生命周期,zuojj,benjamin,benjamin-zuo" />
+    <link rel="alternate" type="application/rss+xml" title="" href="https://zuojj.github.io/react-tutorial//feed.xml">
+    <title>Demo09 - 组件的生命周期 - zuojj</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">您使用的浏览器版本<strong>过老</strong>，请<a href="http://browsehappy.com/">使用最新的浏览器</a>来提升浏览体验。</p>
+<![endif]-->
+<section class="page-header">
+    <h1 class="project-name">React-tutorial</h1>
+    <h2 class="project-tagline">React 学习指南及实例教程</h2>
+    <a href="https://github.com/zuojj/react-tutorial" class="btn">View on GitHub</a>
+    <a href="https://github.com/zuojj/react-tutorial/zipball/master" class="btn">Download .zip</a>
+    <a href="https://github.com/zuojj/react-tutorial/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+<section class="main-content">
+    <div class="main-content-crumb"><a href="/">首页</a><span style="margin: 0 10px">&gt;</span><span>demo09</span></div>
+    <h3 title="Demo09 - 组件的生命周期">Demo09 - 组件的生命周期 by zuojj at 01 Jul 2016</h3>
+    <iframe frameborder="0" width="100%" height="300" border="0" src="/react-demos/demo09/index.html" class="post-iframe"></iframe>
+    <p>React 的组件的生命周期分为实例化、存在期、销毁&amp;清理期，不同阶段会触发不同的方法，可以通过F12快捷键，输入用户名称，console控制台查看</p>
+
+<p><strong>HTML</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div id="form-outer"&gt;&lt;/div&gt;
+</code></pre>
+</div>
+
+<p><strong>JAVASCRIPT</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ + console.log查看组件的生命周期!!!
+ */</span>
+<span class="kd">var</span> <span class="nx">Form</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="c1">// ==========实例化===========</span>
+    <span class="na">getDefaultProps</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'getDefaultProps'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="na">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'getInitialState'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">username</span><span class="p">:</span> <span class="s1">'Benjamin-zuo'</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+
+    <span class="na">componentWillMount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'componentWillMount'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'render'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"input-outer"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span> <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleChange</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"remove"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleClick</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>            <span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="na">componentDidMount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'componentDidMount'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="c1">// =========存在期===========</span>
+    <span class="c1">// 已加载组件收到新的参数时调用，比如：组件的props通过父组件来更改时</span>
+    <span class="na">componentWillReceiveProps</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'componentWillReceiveProps'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="c1">// 组件判断是否重新渲染时调用</span>
+    <span class="na">shouldComponentUpdate</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'shouldComponentUpdate'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="c1">// 组件更新前调用</span>
+    <span class="na">componentWillUpdate</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'componentWillUpdate'</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// 组件更新完调用</span>
+    <span class="na">componentDidUpdate</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'componentDidUpdate'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="c1">// ===========销毁&amp; 清理期==========</span>
+    <span class="na">componentWillUnmount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'componentWillUnmount'</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="na">handleClick</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'form-outer'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="na">handleChange</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+            <span class="na">username</span><span class="p">:</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Form</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'form-outer'</span><span class="p">));</span>
+</code></pre>
+</div>
+
+</section>
+<footer class="page-footer">
+    <span class="page-footer-owner">
+        <a href="https://github.com/zuojj/react-tutorial">React-tutorial</a>
+        is maintained by
+        <a href="https://github.com/zuojj">zuojj</a>
+    </span>
+</footer>
+</body>
+</html>

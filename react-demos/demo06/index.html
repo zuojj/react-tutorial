@@ -12,7 +12,7 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
 </head>
 <body>
-<div id="form"></div>
+<div id="getDom"></div>
 <script type="text/babel">
     /**
      * Uncaught SyntaxError: embedded: Expected corresponding JSX closing tag for <input> (7:122)
@@ -25,11 +25,16 @@
             username.focus();
         },
         render: function() {
-            return <form><input type="text" ref="username"/><input type="button" value="Click Me" onClick={this.handleClick}/></form>
+            return (
+                <form>
+                    <input type="text" ref="username"/>    
+                    <input type="button" value="Click Me" onClick={this.handleClick}/>
+                </form>
+            );
         }
     });
 
-    ReactDOM.render(<Form/>, document.getElementById('form'));
+    ReactDOM.render(<Form/>, document.getElementById('getDom'));
 </script> 
 </body>
 </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Demo11 - mixin定时器_zuojj" />
+    <meta name="keywords" content="Demo11 - mixin定时器,zuojj,benjamin,benjamin-zuo" />
+    <link rel="alternate" type="application/rss+xml" title="" href="https://zuojj.github.io/react-tutorial//feed.xml">
+    <title>Demo11 - mixin定时器 - zuojj</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">您使用的浏览器版本<strong>过老</strong>，请<a href="http://browsehappy.com/">使用最新的浏览器</a>来提升浏览体验。</p>
+<![endif]-->
+<section class="page-header">
+    <h1 class="project-name">React-tutorial</h1>
+    <h2 class="project-tagline">React 学习指南及实例教程</h2>
+    <a href="https://github.com/zuojj/react-tutorial" class="btn">View on GitHub</a>
+    <a href="https://github.com/zuojj/react-tutorial/zipball/master" class="btn">Download .zip</a>
+    <a href="https://github.com/zuojj/react-tutorial/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+<section class="main-content">
+    <div class="main-content-crumb"><a href="/">首页</a><span style="margin: 0 10px">&gt;</span><span>demo11</span></div>
+    <h3 title="Demo11 - mixin定时器">Demo11 - mixin定时器 by zuojj at 02 Jul 2016</h3>
+    <iframe frameborder="0" width="100%" height="300" border="0" src="/react-demos/demo11/index.html" class="post-iframe"></iframe>
+    <p>本实例通过使用mixin优化定时器，提取公共部分，实现多个组件共用</p>
+
+<p><strong>HTML</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div id="countdown-01"&gt;&lt;/div&gt;
+&lt;div id="countdown-02"&gt;&lt;/div&gt;
+</code></pre>
+</div>
+
+<p><strong>JAVASCRIPT</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * 实现简单倒计时
+ */</span>
+<span class="kd">var</span> <span class="nx">Countdown</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">leftTime</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">reflow</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">leftTime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+                <span class="na">leftTime</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">leftTime</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="p">});</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_interval</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">componentDidMount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reflow</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">leftTime</span><span class="p">}</span><span class="err">秒</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Countdown</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'countdown-01'</span><span class="p">));</span>
+
+<span class="cm">/**
+ + 使用mixin优化，提取公共部分，多个组件共用
+ */</span>
+
+<span class="kd">var</span> <span class="nx">IntervalMixin</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">componentDidMount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onReflow</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="na">componentWillUnmount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_interval</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">CountdownTwo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">mixins</span><span class="p">:</span> <span class="p">[</span><span class="nx">IntervalMixin</span><span class="p">()],</span>
+    <span class="na">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">leftTime</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">onReflow</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">leftTime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+                <span class="na">leftTime</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">leftTime</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="p">});</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_interval</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">leftTime</span><span class="p">}</span><span class="err">秒</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">CountdownTwo</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'countdown-02'</span><span class="p">));</span>
+</code></pre>
+</div>
+
+</section>
+<footer class="page-footer">
+    <span class="page-footer-owner">
+        <a href="https://github.com/zuojj/react-tutorial">React-tutorial</a>
+        is maintained by
+        <a href="https://github.com/zuojj">zuojj</a>
+    </span>
+</footer>
+</body>
+</html>
