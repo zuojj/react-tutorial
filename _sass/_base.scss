@@ -310,6 +310,14 @@ a:hover {
     background-color: #eff0f1;
 }
 
+.main-content-crumb {
+    font-size: 1.17em;
+    color: #159957;
+    a {
+        color: #159957
+    }
+}
+
 @media screen and (min-width: 64em) {
     .main-content {
         font-size: 1.1rem; 
@@ -336,41 +344,46 @@ a:hover {
     }
 }
 
-.site-footer {
+
+
+/* footer */
+
+.page-footer {
     margin-top: 2rem;
     padding: 2rem 0;
     text-align: center;
     border-top: solid 1px #eff0f1;
     background-color: #fbfbfb;
-}
 
-.site-footer-owner {
-    font-weight: bold; 
+    &-owner {
+        font-weight: bold; 
 
-    display: block;
-}
-
-.site-footer-credits {
-    color: #819198;
+        display: block;
+    }
+    &-credits {
+        color: #819198;
+    }
 }
 
 @media screen and (min-width: 64em) {
-    .site-footer {
+    .page-footer {
         font-size: 1rem;
     }
 }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
-    .site-footer {
+    .page-footer {
         font-size: 1rem;
     }
 }
 
 @media screen and (max-width: 42em) {
-    .site-footer {
+    .page-footer {
         font-size: .9rem;
     }
 }
+
+
 
 .post-iframe {
     border: 1px solid #ccc;

@@ -1,6 +1,8 @@
 {% include head.html %}
 {% include header.html %}
 <section class="main-content">
+    <div class="main-content-crumb"><a href="{{ "/" | prepend: site.baseurl }}">首页</a><span style="margin: 0 10px">&gt;</span><span>{{page.demoFolderName}}</span></div>
+    <h3 title="{{ page.title }}">{{ page.title }} by {{ page.author }} at {{page.date | date_to_string}}</h3>
     <iframe frameborder="0" width="100%" height="300" border="0" src="{{ site.baseurl}}/react-demos/{{page.demoFolderName}}/index.html" class="post-iframe"></iframe>
     {{ content }}
 </section>

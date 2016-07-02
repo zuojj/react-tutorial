@@ -21,6 +21,7 @@
     var Form = React.createClass({
         // ==========实例化===========
         getDefaultProps: function() {
+            console.log('============== 实例化start ==============');
             console.log('getDefaultProps');
         },
 
@@ -47,6 +48,7 @@
 
         componentDidMount: function() {
             console.log('componentDidMount');
+            console.log('============== 实例化end ==============');
         },
 
         // =========存在期===========
@@ -57,7 +59,10 @@
 
         // 组件判断是否重新渲染时调用
         shouldComponentUpdate: function() {
+            console.log('============== 我是分割线  ==============');
+            console.log('============== 存在期start ==============');
             console.log('shouldComponentUpdate');
+
             return true;
         },
 
@@ -69,6 +74,7 @@
         // 组件更新完调用
         componentDidUpdate: function() {
             console.log('componentDidUpdate');
+            console.log('============== 存在期end ==============');
         },
 
         // ===========销毁& 清理期==========
