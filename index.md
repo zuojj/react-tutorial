@@ -27,13 +27,16 @@ React + React-Router + Redux + Webpack + ES6 + Mocha
 
 <a name="demos"></a>
 
-## Demos (react-v15.1.0)
+## 实例教程 (react-v15.1.0)
 
-<ol class="index-olist">
+<ul class="post-list">
 {% for post in site.posts %}
-    <li><a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title | strip_html }}">{{ post.title | strip_html }}</a> <span class="date">[{{ post.author }} 发布于 {{ post.date | date_to_string}}]</span></li>
+    <li class="post-list-item">
+        <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title | strip_html }}" class="post-list-content">{{ post.title | strip_html }}</a> 
+        <span class="post-list-extra">{{ post.author }} 发布于 {{ post.date | date_to_string}}</span>
+    </li>
 {% endfor %}
-</ol>
+</ul>
 
 <a name="relative-resource"></a>
 

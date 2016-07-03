@@ -1,3 +1,5 @@
+@import "./helpers/css3";
+
 * {
     box-sizing: border-box;
 }
@@ -393,4 +395,22 @@ a:hover {
 .browsehappy {
     background-color: orange;
     line-height: 24px;
+}
+
+/* index.md post list */
+.post-list {
+    &-item {
+    }
+    &-content {
+        display: inline-block;
+        min-width: 500px;
+    }
+    &-extra {
+        width: 220px;
+        text-align: right;
+        display: inline-block;
+        color: #ccc;
+        font-size: 14px;
+        vertical-align: middle;
+    }   
 }
