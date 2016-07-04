@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -353,6 +354,16 @@ td,
 th {
   padding: 0; }
 
+/**
+ * 
+ * @authors      Benjamin (cuew1987@gmail.com)
+ * @link         https://github.com/benjamin-zuo
+ * @date         2016-03-11 15:26:52
+ * @description  CSS3 混合器
+ * @source       https://github.com/thomas-mcdonald/bootstrap-sass/blob/master/vendor/assets/stylesheets/bootstrap/_mixins.scss
+ * 
+ * @version      $Id$
+ */
 * {
   box-sizing: border-box; }
 
@@ -632,6 +643,18 @@ a:hover {
 .browsehappy {
   background-color: orange;
   line-height: 24px; }
+
+/* index.md post list */
+.post-list-content {
+  display: inline-block;
+  min-width: 500px; }
+.post-list-extra {
+  width: 220px;
+  text-align: right;
+  display: inline-block;
+  color: #ccc;
+  font-size: 14px;
+  vertical-align: middle; }
 
 /*
 The MIT License (MIT)
