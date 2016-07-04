@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo13-组件复合</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../build/react.js"></script>
+<script src="../build/react-dom.js"></script>
+<script src="../build/browser.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script> -->
+</head>
+<style type="text/css">
+    .rc-select {
+        width: 200px;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        line-height: 36px;
+    }
+    .rc-select-header {
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+        line-height: 20px;
+        background-color: #fbfbfb;
+        word-break: break-all;
+    }
+    .rc-select-body {
+        padding: 5px; 
+    }
+    .rc-select-item {
+        display: block;
+        cursor: pointer;
+    }
+    .rc-select-item:not(:last-child) {
+        border-bottom: 1px dashed #ccc;
+    }
+    .rc-select-checkbox {
+        padding: 0;
+        margin: 0 5px 0 0;
+        vertical-align: -2px;
+    }
+</style>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+    /**
+     * 单个选项
+     */
+    var MultipleSelectItem = React.createClass({
+        propTypes: {
+            text: React.PropTypes.string.isRequired,
+            value: React.PropTypes.string.isRequired,
+            checked: React.PropTypes.bool
+        },
+        getDefaultProps: function() {
+            return {
+                id: null,
+                checked: false
+            }
+        },
+        getInitialState: function() {
+            return {
+                checked: !! this.props.checked
+            }
+        },
+        handleChange: function(e) {
+            var obj = {
+                checked: !this.state.checked
+            };
+
+            this.setState(obj);
+
+            obj.index = this.props.index;
+
+            this.props.handleClick(obj);
+        },
+        render: function() {
+            return (
+                <label className="rc-select-item" htmlFor={this.props.id}>
+                    <input type="checkbox" 
+                        id={this.props.id}
+                        value={this.props.value} 
+                        checked={this.state.checked} 
+                        className="rc-select-checkbox" 
+                        onChange={this.handleChange} />
+                    <span className="rc-select-content">
+                        {this.props.text}
+                    </span>
+                </label>
+            );
+        }
+    });
+
+    // 父组件
+    var MultipleSelect = React.createClass({
+        propTypes: {
+            name: React.PropTypes.string.isRequired,
+            placeholder: React.PropTypes.string.isRequired,
+            data: React.PropTypes.array.isRequired
+        },
+        getInitialState: function() {
+            return this.selected();
+        },
+        handleClick: function(obj) {
+            this.props.data[obj.index].checked = obj.checked;
+
+            this.setState(this.selected());
+        },
+        getItems: function() {
+            var name = this.props.name;
+
+            return this.props.data.map(function(item, index) {
+                return <MultipleSelectItem 
+                        key={index}
+                        index={index}
+                        id={name + '-' + index}
+                        text={item.text} 
+                        value={item.value} 
+                        checked={!!item.checked}
+                        handleClick={this.handleClick} />
+            }.bind(this));
+        },
+        /**
+         * [selected 处理选中]
+         * @return {[type]} [description]
+         */
+        selected: function() {
+            var values = [],
+                texts  = [];
+
+            this.props.data.map(function(item, index) {
+                if(item.checked) {
+                    values.push(item.value);
+                    texts.push(item.text);    
+                } 
+            });
+
+            return {
+                values: values.length ? values.join(',') : '',
+                texts: texts.length ? texts.join(',') : this.props.placeholder
+            }
+        },
+        render: function() {
+            return (
+                <div className="rc-select">
+                    <input type="hidden" name={this.props.name} value={this.state.values} />
+                    <div className="rc-select-header">{this.state.texts}</div>
+                    <div className="rc-select-body">
+                        {this.getItems()}
+                    </div>
+                </div>
+            );
+        }
+    });
+
+
+    /**
+     * 组件调用
+     * @type {String}
+     */
+    ReactDOM.render(
+        <MultipleSelect 
+        name="sex"
+        placeholder="请选择省份" 
+        data={
+            [{
+                value: '1',
+                text: '北京'
+            },{
+                value: '2',
+                text: '上海',
+                checked: true
+            },{
+                value: '3',
+                text: '重庆'
+            },{
+                value: '4',
+                text: '天津'
+            },{
+                value: '5',
+                text: '安徽'
+            }]
+        } />, document.getElementById('container'));
+</script> 
+</body>
+</html>
