@@ -13,17 +13,17 @@ permalink: /
 * [相关资源](#relative-resource)
 * [辅助工具](#tools)
 
-<a name="tech-stack"></a>
-
-## 技术栈
-React + React-Router + Redux + Webpack + ES6 + Mocha
-
 <a name="site"></a>
 
 ## 官网
 * [React](https://facebook.github.io/react/index.html)
 * [Redux](https://github.com/reactjs/redux)
 * [Flux](https://facebook.github.io/flux/)
+
+<a name="tech-stack"></a>
+
+## 技术栈
+React + React-Router + Redux + Webpack + ES6 + Mocha
 
 <a name="demos"></a>
 
